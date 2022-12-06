@@ -1,0 +1,108 @@
+table{
+    border-spacing: 0;
+}
+
+td, th{
+    border: 1px solid black;
+    padding: 10px;
+    background-color: white;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 100px;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    padding-top: 50px;
+    font-family: Snell Roundhand, cursive;
+}
+
+body{
+    background-color: khaki;
+}
+
+.shadow{
+    margin: 20px 500px;
+    background-color: peachpuff;
+    border-radius: 100px;
+    box-shadow: 0 0 5px 2px;
+}
+
+.dataSending{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divText{
+    font-size: 18px;
+}
+
+.processingBtn{
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#inputId, #inputTitle {
+    height: 30px;
+}
+
+#formSend{
+    background-color: peachpuff;
+    margin: 20px 500px;
+    border-radius: 100px;
+}
+
+.formInputText{
+    display: flex;
+    justify-content: flex-start;
+    font-family: Snell Roundhand, cursive;
+    /*width: 35%;*/
+}
+
+.heading{
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-family: Snell Roundhand, cursive;
+}
+
+#btnSend, #btnBack, #btnClear {
+    margin: 20px;
+}
+#btnSend {
+    margin-left: 0;
+}
+#btnClear {
+    margin-right: 0;
+}
+
+.Id{
+    color: white;
+}
+
+.tdFlex{
+    display: flex;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="styleForm.css" rel="stylesheet">
+</head>
+<body>
+<div class="shadow">
+  <form>
+    <div class="text">Элементы управления</div>
+    <div class="form">
+      <select size="1" id="selected">
+        <option selected value="selectTable">Выберите таблицу</option>
+        <option value="Subject">Предметы</option>
+        <option value="Teachers">Преподаватели</option>
+        <option value="Students">Студенты</option>
+        <option value="ControlWeekOne">Контрольная неделя 1</option>
+        <option value="ControlWeekTwo">Контрольная неделя 2</option>
+        <option value="ControlWeekThree">Контрольная неделя 3</option>
+        <option value="GroupFaculty">Группы</option>
+      </select>
+
+     <button id="addBtn" type="button">Добавить запись</button>
+
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <table id="tagTable">
+    <tbody id="table">
+    <tr id="header"></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="formSend">
+
+</div>
+
+<script src="fetch.js"></script>
+</body>
+</html>
