@@ -22,6 +22,11 @@ let OneControlWeek = [];
 let TwoControlWeek = [];
 let ThreeControlWeek = [];
 let formStudy = [];
+let Semesters = [];
+
+sendRequst('GET', 'http://localhost:8080/semesters').then(data => {
+    for (let i = 0; i < data.length; i++) {
+        Semesters.push(data[i])}}).catch(err => console.log(err));
 
 sendRequst('GET', 'http://localhost:8080/subject').then(data => {
     for (let i = 0; i < data.length; i++) {
@@ -972,16 +977,16 @@ function formAddForControlWeek() {
     // tagPId.innerHTML = 'Введите id предмета';
 
     let tagPNameStudent = document.createElement('p');
-    tagPNameStudent.innerHTML = 'Введите Ф.И.О студента';
+    tagPNameStudent.innerHTML = 'Выберите Ф.И.О студента';
 
     let tagPSubject = document.createElement('p');
-    tagPSubject.innerHTML = 'Введите предмет';
+    tagPSubject.innerHTML = 'Выберите предмет';
 
     let tagPTeacher = document.createElement('p');
-    tagPTeacher.innerHTML = 'Введите Ф.И.О преподавателя';
+    tagPTeacher.innerHTML = 'Выберите Ф.И.О преподавателя';
 
     let tagPSemester = document.createElement('p');
-    tagPSemester.innerHTML = 'Введите семестр';
+    tagPSemester.innerHTML = 'Выберите семестр';
 
     let tagPMark = document.createElement('p');
     tagPMark.innerHTML = 'Введите успеваемость'
@@ -1003,46 +1008,78 @@ function formAddForControlWeek() {
     // inputIdDiv.className = 'formInput';
     // inputIdDiv.append(inputId);
 
-    let inputNameStudent = document.createElement('input');
-    inputNameStudent.inputMode = 'text';
-    inputNameStudent.id = 'inputTitle';
-    inputNameStudent.size = '62';
+    let selectNameStudent = document.createElement('select');
+    selectNameStudent.id = 'selectNameStudent';
+    let optionSelectValueNameStudent = document.createElement('option');
+    optionSelectValueNameStudent.selected;
+    optionSelectValueNameStudent.innerHTML = 'Выберите студента';
+    selectNameStudent.append(optionSelectValueNameStudent);
+    for (let i = 0; i < Student.length ; i++) {
+        let option = document.createElement('option');
+        option.value = Student[i].id;
+        option.innerHTML = Student[i].lastName + ' ' + Student[i].firstName + ' ' + Student[i].patronymic;
+        selectNameStudent.append(option);
+    }
 
-    let inputSubject = document.createElement('input');
-    inputSubject.inputMode = 'text';
-    inputSubject.id = 'inputTitle';
-    inputSubject.size = '62';
+    let selectSubject = document.createElement('select');
+    selectSubject.id = 'selectSubject';
+    let optionSelectValueSubject = document.createElement('option');
+    optionSelectValueSubject.selected;
+    optionSelectValueSubject.innerHTML = 'Выберите предмет';
+    selectSubject.append(optionSelectValueSubject);
+    for (let i = 0; i < Subject.length ; i++) {
+        let option = document.createElement('option');
+        option.value = Subject[i].id;
+        option.innerHTML = Subject[i].title;
+        selectSubject.append(option);
+    }
 
-    let inputTeacher = document.createElement('input');
-    inputTeacher.inputMode = 'text';
-    inputTeacher.id = 'inputTitle';
-    inputTeacher.size = '62';
+    let selectTeacher = document.createElement('select');
+    selectTeacher.id = 'selectTeacher';
+    let optionSelectValueTeacher = document.createElement('option');
+    optionSelectValueTeacher.selected;
+    optionSelectValueTeacher.innerHTML = 'Выберите преподавателя';
+    selectTeacher.append(optionSelectValueTeacher);
+    for (let i = 0; i < Teacher.length ; i++) {
+        let option = document.createElement('option');
+        option.value = Teacher[i].id;
+        option.innerHTML = Teacher[i].lastName + ' ' + Teacher[i].firstName + ' ' + Teacher[i].patronymic;
+        selectTeacher.append(option);
+    }
 
-    let inputSemester = document.createElement('input');
-    inputSemester.inputMode = 'text';
-    inputSemester.id = 'inputTitle';
-    inputSemester.size = '62';
+    let selectSemester = document.createElement('select');
+    selectSemester.id = 'selectSemester';
+    let optionSelectValueSemester = document.createElement('option');
+    optionSelectValueSemester.selected;
+    optionSelectValueSemester.innerHTML = 'Выберите семестор';
+    selectSemester.append(optionSelectValueSemester);
+    for (let i = 0; i < Semesters.length ; i++) {
+        let option = document.createElement('option');
+        option.value = Semesters[i].id;
+        option.innerHTML = Semesters[i].name;
+        selectSemester.append(option);
+    }
 
     let inputMark = document.createElement('input');
     inputMark.inputMode = 'text';
     inputMark.id = 'inputTitle';
     inputMark.size = '62';
 
-    let inputNameStudentDiv = document.createElement('div');
-    inputNameStudentDiv.className = 'formInput';
-    inputNameStudentDiv.append(inputNameStudent);
+    let selectNameStudentDiv = document.createElement('div');
+    selectNameStudentDiv.className = 'formInput';
+    selectNameStudentDiv.append(selectNameStudent);
 
-    let inputSubjectDiv = document.createElement('div');
-    inputSubjectDiv.className = 'formInput';
-    inputSubjectDiv.append(inputSubject);
+    let selectSubjectDiv = document.createElement('div');
+    selectSubjectDiv.className = 'formInput';
+    selectSubjectDiv.append(selectSubject);
 
-    let inputTeacherDiv = document.createElement('div');
-    inputTeacherDiv.className = 'formInput';
-    inputTeacherDiv.append(inputTeacher);
+    let selectTeacherDiv = document.createElement('div');
+    selectTeacherDiv.className = 'formInput';
+    selectTeacherDiv.append(selectTeacher);
 
-    let inputSemesterDiv = document.createElement('div');
-    inputSemesterDiv.className = 'formInput';
-    inputSemesterDiv.append(inputSemester);
+    let selectSemesterDiv = document.createElement('div');
+    selectSemesterDiv.className = 'formInput';
+    selectSemesterDiv.append(selectSemester);
 
     let inputMarkDiv = document.createElement('div');
     inputMarkDiv.className = 'formInput';
@@ -1078,13 +1115,13 @@ function formAddForControlWeek() {
     // divFlex.append(divTextInputId);
     // divFlex.append(inputIdDiv);
     divFlex.append(divTextNameStudent);
-    divFlex.append(inputNameStudentDiv);
+    divFlex.append(selectNameStudentDiv);
     divFlex.append(divTextSubject);
-    divFlex.append(inputSubjectDiv);
+    divFlex.append(selectSubjectDiv);
     divFlex.append(divTextTeacher);
-    divFlex.append(inputTeacherDiv);
+    divFlex.append(selectTeacherDiv);
     divFlex.append(divTextSemester);
-    divFlex.append(inputSemesterDiv);
+    divFlex.append(selectSemesterDiv);
     divFlex.append(divTextMark);
     divFlex.append(inputMarkDiv);
     divFlex.append(divButton);
@@ -1337,7 +1374,7 @@ document.body.addEventListener('click', () => {
 
                 sendBtn.addEventListener('click', function () {
 
-                    let title = '';
+                    let title;
 
                     if(dataFromInput[0].firstElementChild.value.matchAll(regExp) !== null) {
                         title = dataFromInput[0].firstElementChild.value;
