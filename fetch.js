@@ -862,7 +862,7 @@ function formForAddStudent(head) {
     selectGroup.id = 'selectGroup';
     let optionSelectValueGroup = document.createElement('option');
     optionSelectValueGroup.selected;
-    optionSelectValueGroup .innerHTML = 'Выберите предмет';
+    optionSelectValueGroup .innerHTML = 'Выберите группу';
     selectGroup.append(optionSelectValueGroup);
     for (let i = 0; i < GroupFaculty.length ; i++) {
         let option = document.createElement('option');
@@ -1414,10 +1414,10 @@ document.body.addEventListener('click', () => {
 
                 let dataFromInput = document.getElementsByClassName('formInput');
 
-                let lastName = '';
-                let firstName = '';
-                let patronymic = '';
-                let email = '';
+                let lastName;
+                let firstName;
+                let patronymic;
+                let email;
 
                 sendBtn.addEventListener('click', function () {
 
@@ -1495,6 +1495,84 @@ document.body.addEventListener('click', () => {
                 }, 500);
 
                 break;
+            }
+            else if(target.id === `update${i + 1}`){
+                deleteTable();
+
+                formForAddStudent('Изменение записи');
+
+                let sendBtn = document.getElementById('btnSend');
+                sendBtn.innerHTML = 'Изменить запись'
+
+                let dataFromInput = document.getElementsByClassName('formInput');
+
+                let lastName;
+                let firstName;
+                let patronymic;
+                let email;
+                let formStudyThis;
+                let group;
+
+                sendBtn.addEventListener('click', function () {
+                    if (dataFromInput[0].firstElementChild.value.match(regExp) !== null) {
+                        lastName = dataFromInput[0].firstElementChild.value;
+                    } else {
+                        lastName = Student[i].lastName;
+                    }
+                    if (dataFromInput[1].firstElementChild.value.match(regExp) !== null) {
+                        firstName = dataFromInput[1].firstElementChild.value;
+                    } else {
+                        firstName = Student[i].firstName;
+                    }
+                    if (dataFromInput[2].firstElementChild.value.match(regExp) !== null) {
+                        patronymic = dataFromInput[2].firstElementChild.value;
+                    } else {
+                        patronymic = Student[i].patronymic;
+                    }
+                    if (dataFromInput[5].firstElementChild.value.match(regExp) !== null) {
+                        email = dataFromInput[5].firstElementChild.value;
+                    } else {
+                        email = Student[i].email;
+                    }
+
+                    if(dataFromInput[3].firstElementChild.value === 'Выберите форму обучения'){
+                        formStudyThis = Student[i].formStudyId;
+                    } else {
+                        formStudyThis = dataFromInput[3].firstElementChild.value;
+                    }
+
+                    if(dataFromInput[4].firstElementChild.value === 'Выберите группу'){
+                        group = Student[i].groupId;
+                    } else {
+                        group = dataFromInput[4].firstElementChild.value;
+                    }
+
+                    let studentUpdate = {
+                        id: Student[i].id,
+                        lastName: lastName,
+                        firstName: firstName,
+                        patronymic: patronymic,
+                        formStudyId: formStudyThis,
+                        groupId: group,
+                        email: email
+                    }
+
+                    sendRequst('PATCH', 'http://localhost:8080/students/update', studentUpdate).
+                    then(data => console.log(data)).catch(err => console.log(err));
+
+                    setTimeout(() =>{
+                        deleteForm();
+
+                        sendRequst('GET', 'http://localhost:8080/students').then(data => {
+                            parsingTh(data[0].field);
+                        }).catch(err => console.log(err))
+
+                        sendRequst("GET", "http://localhost:8080/students").then(data =>{
+                            parsingTdForStudents(data, formStudy, GroupFaculty);
+                        }).catch(err => console.log(err))
+                    }, 500);
+
+                });
             }
         }
     }
