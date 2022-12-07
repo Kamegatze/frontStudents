@@ -23,6 +23,12 @@ let TwoControlWeek = [];
 let ThreeControlWeek = [];
 let formStudy = [];
 let Semesters = [];
+let Specialization = [];
+
+sendRequst('GET', 'http://localhost:8080/specialization').then(data => {
+    for (let i = 0; i < data.length; i++) {
+        Specialization.push(data[i])}}).catch(err => console.log(err));
+
 
 sendRequst('GET', 'http://localhost:8080/semesters').then(data => {
     for (let i = 0; i < data.length; i++) {
@@ -125,9 +131,7 @@ function parsingTdForSubject(data = []) {
     Subject = [];
     for (let i = 0; i < data.length; i++) {
 
-        if(Subject.length < data.length){
-            Subject.push(data[i]);
-        }
+        Subject.push(data[i]);
 
         let tableRecord = document.createElement('tr');
         tableRecord.className = 'table-record';
@@ -351,7 +355,6 @@ function parsingTdForStudents(dataStudents = [], dataForm = [], dataGroup = []) 
         tableRecord.append(tableData9);
         table.append(tableRecord);
     }
-    console.log(Student);
 }
 
 function parsingTdForGroup(dataGroup = [], dataSpecialization = []) {
@@ -526,10 +529,6 @@ function parsingTdForControlWeek(dataControlWeek = [], dataStudent = [], dataSub
         tableRecord.append(tableData6);
         table.append(tableRecord);
     }
-
-    console.log(OneControlWeek);
-    console.log(TwoControlWeek);
-    console.log(ThreeControlWeek);
 }
 
 function deleteForm() {
@@ -542,7 +541,7 @@ function deleteForm() {
     divForm.style.boxShadow = '';
 }
 
-function formForAddSubject(){
+function formForAddSubject(head){
 
     let formDiv = document.getElementById("formSend");
     formDiv.style = 'box-shadow: 0 0 5px 2px;';
@@ -606,7 +605,7 @@ function formForAddSubject(){
 
     let heading = document.createElement('p');
     heading.className = 'heading';
-    heading.innerHTML = 'Форма добавление';
+    heading.innerHTML = head;
 
     divButton.append(buttonSend);
     divButton.append(buttonBack);
@@ -622,7 +621,7 @@ function formForAddSubject(){
     formDiv.append(form);
 }
 
-function formForAddTeacher() {
+function formForAddTeacher(head) {
     let formDiv = document.getElementById("formSend");
     formDiv.style = 'box-shadow: 0 0 5px 2px;';
 
@@ -735,7 +734,7 @@ function formForAddTeacher() {
 
     let heading = document.createElement('p');
     heading.className = 'heading';
-    heading.innerHTML = 'Форма добавление';
+    heading.innerHTML = head;
 
     divButton.append(buttonSend);
     divButton.append(buttonBack);
@@ -757,7 +756,7 @@ function formForAddTeacher() {
     formDiv.append(form);
 }
 
-function formForAddStudent() {
+function formForAddStudent(head) {
     let formDiv = document.getElementById("formSend");
     formDiv.style = 'box-shadow: 0 0 5px 2px;';
 
@@ -920,7 +919,7 @@ function formForAddStudent() {
 
     let heading = document.createElement('p');
     heading.className = 'heading';
-    heading.innerHTML = 'Форма добавление';
+    heading.innerHTML = head;
 
     divButton.append(buttonSend);
     divButton.append(buttonBack);
@@ -946,7 +945,7 @@ function formForAddStudent() {
     formDiv.append(form);
 }
 
-function formAddForControlWeek() {
+function formAddForControlWeek(head) {
     let formDiv = document.getElementById("formSend");
     formDiv.style = 'box-shadow: 0 0 5px 2px;';
 
@@ -1105,7 +1104,7 @@ function formAddForControlWeek() {
 
     let heading = document.createElement('p');
     heading.className = 'heading';
-    heading.innerHTML = 'Форма добавление';
+    heading.innerHTML = head;
 
     divButton.append(buttonSend);
     divButton.append(buttonBack);
@@ -1129,7 +1128,7 @@ function formAddForControlWeek() {
     formDiv.append(form);
 }
 
-function formForAddGroupFaculty() {
+function formForAddGroupFaculty(head) {
     let formDiv = document.getElementById("formSend");
     formDiv.style = 'box-shadow: 0 0 5px 2px;';
 
@@ -1175,18 +1174,26 @@ function formForAddGroupFaculty() {
     inputGroup.id = 'inputTitle';
     inputGroup.size = '62';
 
-    let inputSpecialization = document.createElement('input');
-    inputSpecialization.inputMode = 'text';
-    inputSpecialization.id = 'inputTitle';
-    inputSpecialization.size = '62';
+    let selectSpecialization = document.createElement('select');
+    selectSpecialization.id = 'selectSemester';
+    let optionSelectValueSpecialization = document.createElement('option');
+    optionSelectValueSpecialization.selected;
+    optionSelectValueSpecialization.innerHTML = 'Выберите специальность';
+    selectSpecialization.append(optionSelectValueSpecialization);
+    for (let i = 0; i < Specialization.length ; i++) {
+        let option = document.createElement('option');
+        option.value = Specialization[i].id;
+        option.innerHTML = Specialization[i].title;
+        selectSpecialization.append(option);
+    }
 
     let inputGroupDiv = document.createElement('div');
     inputGroupDiv.className = 'formInput';
     inputGroupDiv.append(inputGroup);
 
-    let inputSpecializationDiv = document.createElement('div');
-    inputSpecializationDiv.className = 'formInput';
-    inputSpecializationDiv.append(inputSpecialization);
+    let selectSpecializationDiv = document.createElement('div');
+    selectSpecializationDiv.className = 'formInput';
+    selectSpecializationDiv.append(selectSpecialization);
 
     let buttonSend = document.createElement('button');
     buttonSend.type = 'button';
@@ -1208,7 +1215,7 @@ function formForAddGroupFaculty() {
 
     let heading = document.createElement('p');
     heading.className = 'heading';
-    heading.innerHTML = 'Форма добавление';
+    heading.innerHTML = head;
 
     divButton.append(buttonSend);
     divButton.append(buttonBack);
@@ -1220,21 +1227,13 @@ function formForAddGroupFaculty() {
     divFlex.append(divTextGroup);
     divFlex.append(inputGroupDiv);
     divFlex.append(divTextSpecialization);
-    divFlex.append(inputSpecializationDiv);
+    divFlex.append(selectSpecializationDiv);
     divFlex.append(divButton);
     form.append(divFlex);
     formDiv.append(form);
 }
-//Кулаков Виктор Андреевич
-//Рыжкова Мария Николаевна
+
 function sendObject(data = []) {
-    function search(data = [], value) {
-        for (let i = 0; i < data.length; i++) {
-            if(data[i].title === value || `${data[i].lastName} ${data[i].firstName} ${data[i].patronymic}` === value) {
-                return data[i].id;
-            }
-        }
-    }
     if(checkFormSubject){
         sendRequst('POST', 'http://localhost:8080/subject/add', {
             id: 1,
@@ -1267,15 +1266,12 @@ function sendObject(data = []) {
             .catch(err => console.log(err));
     }
     else if (checkFormGroupFaculty) {
-        sendRequst('GET', 'http://localhost:8080/specialization').then(data1 => {
-            let specialization = search(data1, data[1].firstElementChild.value);
-            sendRequst('POST', 'http://localhost:8080/groupFaculty/add', {
-                id: 1,
-                title: data[0].firstElementChild.value,
-                specializationId: specialization
-            }).then(data2 => console.log(data2)
-            ).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+        sendRequst('POST', 'http://localhost:8080/groupFaculty/add', {
+            id: 1,
+            title: data[0].firstElementChild.value,
+            specializationId: Number(data[1].firstElementChild.value)
+        }).then(data2 => console.log(data2)).
+        catch(err => console.log(err));
     }
     else if(checkFormOneControlWeek) {
 
@@ -1334,14 +1330,14 @@ document.body.addEventListener('click', () => {
                     sendRequst("GET", "http://localhost:8080/subject").then(data =>{
                         parsingTdForSubject(data);
                     }).catch(err => console.log(err))
-                }, 1000);
+                }, 500);
 
                 break;
             }
             else if(target.id === `update${i + 1}`){
                 deleteTable();
 
-                formForAddSubject();
+                formForAddSubject('Изменение записи');
 
                 let sendBtn = document.getElementById('btnSend');
                 sendBtn.innerHTML = 'Изменить запись'
@@ -1377,7 +1373,7 @@ document.body.addEventListener('click', () => {
                         sendRequst("GET", "http://localhost:8080/subject").then(data =>{
                             parsingTdForSubject(data);
                         }).catch(err => console.log(err))
-                    }, 1000);
+                    }, 500);
 
                 })
 
@@ -1403,7 +1399,7 @@ document.body.addEventListener('click', () => {
                     sendRequst("GET", "http://localhost:8080/teacher").then(data =>{
                         parsingTdForTeacher(data);
                     }).catch(err => console.log(err))
-                }, 1000);
+                }, 500);
 
                 break;
             }
@@ -1411,7 +1407,7 @@ document.body.addEventListener('click', () => {
 
                 deleteTable();
 
-                formForAddTeacher();
+                formForAddTeacher('Изменение записи');
 
                 let sendBtn = document.getElementById('btnSend');
                 sendBtn.innerHTML = 'Изменить запись'
@@ -1471,7 +1467,7 @@ document.body.addEventListener('click', () => {
                         sendRequst("GET", "http://localhost:8080/teacher").then(data =>{
                             parsingTdForTeacher(data);
                         }).catch(err => console.log(err))
-                    }, 1000);
+                    }, 500);
                 })
 
                 break;
@@ -1494,13 +1490,9 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err))
 
                     sendRequst("GET", "http://localhost:8080/students").then(dataStudent =>{
-                        sendRequst('GET', 'http://localhost:8080/formStudy').then(dataForm => {
-                                sendRequst('GET', 'http://localhost:8080/groupFaculty').then(dataGroup => {
-                                        parsingTdForStudents(dataStudent, dataForm, dataGroup);
-                                }).catch(err => console.log(err));
-                            }).catch(err => console.log(err));
+                        parsingTdForStudents(dataStudent, formStudy, GroupFaculty);
                     }).catch(err => console.log(err))
-                }, 2000);
+                }, 500);
 
                 break;
             }
@@ -1522,11 +1514,9 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err))
 
                     sendRequst('GET', 'http://localhost:8080/groupFaculty').then(dataGroup => {
-                            sendRequst('GET', 'http://localhost:8080/specialization').then(dataSpecialization => {
-                                parsingTdForGroup(dataGroup, dataSpecialization);
-                            }).catch(err => console.log(err));
+                        parsingTdForGroup(dataGroup, Specialization);
                     }).catch(err => console.log(err));
-                }, 2000);
+                }, 500);
 
                 break;
             }
@@ -1548,17 +1538,9 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err))
 
                     sendRequst('GET', 'http://localhost:8080/oneControlWeek').then(dataOneControlWeek => {
-                        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-                            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                                    sendRequst('GET', 'http://localhost:8080/groupFaculty').then(dataGroup => {
-                                        parsingTdForControlWeek(dataOneControlWeek, dataStudents, dataSubject, dataTeacher, dataGroup);
-                                    }).catch(err => console.log(err));
-                                }).catch(err => console.log(err));
-                            }).catch(err => console.log(err));
-                        }).catch(err => console.log(err));
+                        parsingTdForControlWeek(dataOneControlWeek, Student, Subject, Teacher, GroupFaculty);
                     }).catch(err => console.log(err));
-                }, 2000);
+                }, 500);
 
                 break;
             }
@@ -1580,17 +1562,9 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err))
 
                     sendRequst('GET', 'http://localhost:8080/twoControlWeek').then(dataOneControlWeek => {
-                        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-                            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                                    sendRequst('GET', 'http://localhost:8080/groupFaculty').then(dataGroup => {
-                                        parsingTdForControlWeek(dataOneControlWeek, dataStudents, dataSubject, dataTeacher, dataGroup);
-                                    }).catch(err => console.log(err));
-                                }).catch(err => console.log(err));
-                            }).catch(err => console.log(err));
-                        }).catch(err => console.log(err));
+                        parsingTdForControlWeek(dataOneControlWeek, Student, Subject, Teacher, GroupFaculty);
                     }).catch(err => console.log(err));
-                }, 2000);
+                }, 500);
 
                 break;
             }
@@ -1612,17 +1586,9 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err))
 
                     sendRequst('GET', 'http://localhost:8080/threeControlWeek').then(dataOneControlWeek => {
-                        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-                            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                                    sendRequst('GET', 'http://localhost:8080/groupFaculty').then(dataGroup => {
-                                        parsingTdForControlWeek(dataOneControlWeek, dataStudents, dataSubject, dataTeacher, dataGroup);
-                                    }).catch(err => console.log(err));
-                                }).catch(err => console.log(err));
-                            }).catch(err => console.log(err));
-                        }).catch(err => console.log(err));
+                        parsingTdForControlWeek(dataOneControlWeek, Student, Subject, Teacher, GroupFaculty);
                     }).catch(err => console.log(err));
-                }, 2000);
+                }, 500);
 
                 break;
             }
@@ -1876,7 +1842,7 @@ let addBtn = document.getElementById("addBtn");
 addBtn.addEventListener('click', function (){
     deleteTable();
     if (checkSubject) {
-        formForAddSubject();
+        formForAddSubject('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1885,11 +1851,24 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormSubject = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(Subject[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/subject').
+                then(data => {
+                    parsingTdForSubject(data);
+                }).catch(err => console.log(err));
+            }, 500);
+
+           // checkFormSubject = false;
+            checkSubject = true;
         })
+
         checkSubject = false;
     } else if (checkTeachers) {
-        formForAddTeacher();
+        formForAddTeacher('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1898,12 +1877,24 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormTeacher = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(Teacher[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/teacher').
+                then(data => {
+                    parsingTdForTeacher(data);
+                }).catch(err => console.log(err));
+            }, 500);
+
+            //checkFormTeacher = false;
+            checkTeachers = true;
         })
 
         checkTeachers = false;
     } else if (checkStudents) {
-        formForAddStudent();
+        formForAddStudent('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1912,12 +1903,24 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormStudent = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(Student[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/students').
+                then(data => {
+                    parsingTdForStudents(data, formStudy, GroupFaculty);
+                }).catch(err => console.log(err));
+            }, 500);
+
+           // checkFormStudent = false;
+            checkStudents = true;
         })
 
         checkStudents = false;
     } else if (checkOneControlWeek) {
-        formAddForControlWeek();
+        formAddForControlWeek('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1926,13 +1929,25 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormOneControlWeek = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(OneControlWeek[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/oneControlWeek').
+                then(data => {
+                    parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                }).catch(err => console.log(err));
+            }, 500);
+
+            checkOneControlWeek = true;
+            //checkFormOneControlWeek = false;
         })
 
         checkOneControlWeek = false;
 
     } else if (checkTwoControlWeek) {
-        formAddForControlWeek();
+        formAddForControlWeek('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1941,12 +1956,24 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormTwoControlWeek = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(TwoControlWeek[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/twoControlWeek').
+                then(data => {
+                    parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                }).catch(err => console.log(err));
+            }, 500);
+
+            checkTwoControlWeek = true;
+            //checkFormTwoControlWeek = false;
         })
 
         checkTwoControlWeek = false;
     } else if (checkThreeControlWeek) {
-        formAddForControlWeek();
+        formAddForControlWeek('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1955,12 +1982,24 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(ThreeControlWeek[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/threeControlWeek').
+                then(data => {
+                    parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                }).catch(err => console.log(err));
+            }, 500);
+
+            checkThreeControlWeek = true;
             checkFormTwoControlWeek = false;
         })
 
         checkThreeControlWeek = false;
     } else if (checkGroupFaculty) {
-        formForAddGroupFaculty();
+        formForAddGroupFaculty('Добавление записи');
 
         let dataFromInput = document.getElementsByClassName('formInput');
 
@@ -1969,7 +2008,19 @@ addBtn.addEventListener('click', function (){
         sendBtn.addEventListener('click', function () {
             sendObject(dataFromInput);
 
-            checkFormGroupFaculty = false;
+            setTimeout(() => {
+                deleteForm();
+
+                parsingTh(GroupFaculty[0].field);
+
+                sendRequst('GET', 'http://localhost:8080/groupFaculty').
+                then(data => {
+                    parsingTdForGroup(data, Specialization);
+                }).catch(err => console.log(err));
+            }, 500);
+
+            checkGroupFaculty = true;
+            //checkFormGroupFaculty = false;
         })
 
         checkGroupFaculty = false;
