@@ -93,6 +93,10 @@ body{
     }
 }
 
+.formInput > select {
+    width: 30em;
+}
+
 .formInputText{
     display: flex;
     justify-content: flex-start;

@@ -1254,8 +1254,6 @@ function sendObject(data = []) {
     }
     else if(checkFormStudent) {
 
-        console.log(data);
-
         sendRequst('POST', 'http://localhost:8080/students/add', {
             id: 1,
             lastName: data[0].firstElementChild.value,
@@ -1280,61 +1278,39 @@ function sendObject(data = []) {
         }).catch(err => console.log(err));
     }
     else if(checkFormOneControlWeek) {
-        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                    let studentId = search(dataStudents, data[0].firstElementChild.value);
-                    let subjectId = search(dataSubject, data[1].firstElementChild.value);
-                    let teacherId = search(dataTeacher, data[2].firstElementChild.value);
-                    sendRequst("POST", "http://localhost:8080/oneControlWeek/add", {
-                        studentId: studentId,
-                        subjectId: subjectId,
-                        teacherId: teacherId,
-                        semesterId: Number(data[3].firstElementChild.value),
-                        mark: Number(data[4].firstElementChild.value),
-                    }).then(dataOneControlWeek => console.log(dataOneControlWeek))
-                        .catch(err => console.log(err));
-                }).catch(err => console.log(err));
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+
+        sendRequst('POST', 'http://localhost:8080/oneControlWeek/add', {
+            id: 1,
+            studentId: Number(data[0].firstElementChild.value),
+            subjectId: Number(data[1].firstElementChild.value),
+            teacherId: Number(data[2].firstElementChild.value),
+            semesterId: Number(data[3].firstElementChild.value),
+            mark: Number(data[4].firstElementChild.value)
+        }).
+        then(data => console.log(data)).catch(err => console.log(err));
+
     }
     else if(checkFormTwoControlWeek) {
-        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                    let studentId = search(dataStudents, data[0].firstElementChild.value);
-                    let subjectId = search(dataSubject, data[1].firstElementChild.value);
-                    let teacherId = search(dataTeacher, data[2].firstElementChild.value);
-                    sendRequst("POST", "http://localhost:8080/twoControlWeek/add", {
-                        studentId: studentId,
-                        subjectId: subjectId,
-                        teacherId: teacherId,
-                        semesterId: Number(data[3].firstElementChild.value),
-                        mark: Number(data[4].firstElementChild.value),
-                    }).then(dataTwoControlWeek => console.log(dataTwoControlWeek))
-                        .catch(err => console.log(err));
-                }).catch(err => console.log(err));
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+        sendRequst('POST', 'http://localhost:8080/twoControlWeek/add', {
+            id: 1,
+            studentId: Number(data[0].firstElementChild.value),
+            subjectId: Number(data[1].firstElementChild.value),
+            teacherId: Number(data[2].firstElementChild.value),
+            semesterId: Number(data[3].firstElementChild.value),
+            mark: Number(data[4].firstElementChild.value)
+        }).
+        then(data => console.log(data)).catch(err => console.log(err));
     }
     else if(checkFormThreeControlWeek){
-        sendRequst('GET', 'http://localhost:8080/students').then(dataStudents => {
-            sendRequst('GET', 'http://localhost:8080/subject').then(dataSubject => {
-                sendRequst('GET', 'http://localhost:8080/teacher').then(dataTeacher => {
-                    let studentId = search(dataStudents, data[0].firstElementChild.value);
-                    let subjectId = search(dataSubject, data[1].firstElementChild.value);
-                    let teacherId = search(dataTeacher, data[2].firstElementChild.value);
-                    sendRequst("POST", "http://localhost:8080/threeControlWeek/add", {
-                        studentId: studentId,
-                        subjectId: subjectId,
-                        teacherId: teacherId,
-                        semesterId: Number(data[3].firstElementChild.value),
-                        mark: Number(data[4].firstElementChild.value),
-                    }).then(dataThreeControlWeek => console.log(dataThreeControlWeek))
-                        .catch(err => console.log(err));
-                }).catch(err => console.log(err));
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+        sendRequst('POST', 'http://localhost:8080/threeControlWeek/add', {
+            id: 1,
+            studentId: Number(data[0].firstElementChild.value),
+            subjectId: Number(data[1].firstElementChild.value),
+            teacherId: Number(data[2].firstElementChild.value),
+            semesterId: Number(data[3].firstElementChild.value),
+            mark: Number(data[4].firstElementChild.value)
+        }).
+        then(data => console.log(data)).catch(err => console.log(err));
     }
 }
 
