@@ -1233,6 +1233,189 @@ function formForAddGroupFaculty(head) {
     formDiv.append(form);
 }
 
+function formChangForControlWeek(head) {
+    let formDiv = document.getElementById("formSend");
+    formDiv.style = 'box-shadow: 0 0 5px 2px;';
+
+    let form = document.createElement('form');
+    form.className = 'deleteForm';
+
+    let divFlex = document.createElement('div');
+    divFlex.className = 'dataSending';
+
+    // let divTextInputId = document.createElement('div');
+    let divTextNameStudent = document.createElement('div');
+    // divTextInputId.className = 'formInputText';
+    divTextNameStudent.className = 'formInputText';
+
+    let divTextSubject = document.createElement('div');
+    divTextSubject.className = 'formInputText';
+
+    let divTextTeacher = document.createElement('div');
+    divTextTeacher.className = 'formInputText';
+
+    let divTextSemester = document.createElement('div');
+    divTextSemester.className = 'formInputText';
+
+    let divTextMark = document.createElement('div');
+    divTextMark.className = 'formInputText';
+
+    // let tagPId = document.createElement('p');
+    // tagPId.innerHTML = 'Введите id предмета';
+
+    let tagPNameStudent = document.createElement('p');
+    tagPNameStudent.innerHTML = 'Выберите Ф.И.О студента';
+
+    let tagPSubject = document.createElement('p');
+    tagPSubject.innerHTML = 'Выберите предмет';
+
+    let tagPTeacher = document.createElement('p');
+    tagPTeacher.innerHTML = 'Выберите Ф.И.О преподавателя';
+
+    let tagPSemester = document.createElement('p');
+    tagPSemester.innerHTML = 'Выберите семестр';
+
+    let tagPMark = document.createElement('p');
+    tagPMark.innerHTML = 'Введите успеваемость'
+
+    // divTextInputId.append(tagPId);
+    // divTextNameStudent.append(tagPNameStudent);
+    // divTextSubject.append(tagPSubject);
+    // divTextTeacher.append(tagPTeacher);
+    // divTextSemester.append(tagPSemester);
+    divTextMark.append(tagPMark);
+
+    // let inputId = document.createElement('input');
+    // inputId.inputMode = 'number';
+    // inputId.id = 'inputId';
+    // inputId.min = '1';
+    // inputId.size = '62';
+
+    // let inputIdDiv = document.createElement('div');
+    // inputIdDiv.className = 'formInput';
+    // inputIdDiv.append(inputId);
+
+    // let selectNameStudent = document.createElement('select');
+    // selectNameStudent.id = 'selectNameStudent';
+    // let optionSelectValueNameStudent = document.createElement('option');
+    // optionSelectValueNameStudent.selected;
+    // optionSelectValueNameStudent.innerHTML = 'Выберите студента';
+    // selectNameStudent.append(optionSelectValueNameStudent);
+    // for (let i = 0; i < Student.length ; i++) {
+    //     let option = document.createElement('option');
+    //     option.value = Student[i].id;
+    //     option.innerHTML = Student[i].lastName + ' ' + Student[i].firstName + ' ' + Student[i].patronymic;
+    //     selectNameStudent.append(option);
+    // }
+    //
+    // let selectSubject = document.createElement('select');
+    // selectSubject.id = 'selectSubject';
+    // let optionSelectValueSubject = document.createElement('option');
+    // optionSelectValueSubject.selected;
+    // optionSelectValueSubject.innerHTML = 'Выберите предмет';
+    // selectSubject.append(optionSelectValueSubject);
+    // for (let i = 0; i < Subject.length ; i++) {
+    //     let option = document.createElement('option');
+    //     option.value = Subject[i].id;
+    //     option.innerHTML = Subject[i].title;
+    //     selectSubject.append(option);
+    // }
+    //
+    // let selectTeacher = document.createElement('select');
+    // selectTeacher.id = 'selectTeacher';
+    // let optionSelectValueTeacher = document.createElement('option');
+    // optionSelectValueTeacher.selected;
+    // optionSelectValueTeacher.innerHTML = 'Выберите преподавателя';
+    // selectTeacher.append(optionSelectValueTeacher);
+    // for (let i = 0; i < Teacher.length ; i++) {
+    //     let option = document.createElement('option');
+    //     option.value = Teacher[i].id;
+    //     option.innerHTML = Teacher[i].lastName + ' ' + Teacher[i].firstName + ' ' + Teacher[i].patronymic;
+    //     selectTeacher.append(option);
+    // }
+    //
+    // let selectSemester = document.createElement('select');
+    // selectSemester.id = 'selectSemester';
+    // let optionSelectValueSemester = document.createElement('option');
+    // optionSelectValueSemester.selected;
+    // optionSelectValueSemester.innerHTML = 'Выберите семестор';
+    // selectSemester.append(optionSelectValueSemester);
+    // for (let i = 0; i < Semesters.length ; i++) {
+    //     let option = document.createElement('option');
+    //     option.value = Semesters[i].id;
+    //     option.innerHTML = Semesters[i].name;
+    //     selectSemester.append(option);
+    // }
+
+    let inputMark = document.createElement('input');
+    inputMark.inputMode = 'text';
+    inputMark.id = 'inputTitle';
+    inputMark.size = '62';
+
+    // let selectNameStudentDiv = document.createElement('div');
+    // selectNameStudentDiv.className = 'formInput';
+    // selectNameStudentDiv.append(selectNameStudent);
+    //
+    // let selectSubjectDiv = document.createElement('div');
+    // selectSubjectDiv.className = 'formInput';
+    // selectSubjectDiv.append(selectSubject);
+    //
+    // let selectTeacherDiv = document.createElement('div');
+    // selectTeacherDiv.className = 'formInput';
+    // selectTeacherDiv.append(selectTeacher);
+    //
+    // let selectSemesterDiv = document.createElement('div');
+    // selectSemesterDiv.className = 'formInput';
+    // selectSemesterDiv.append(selectSemester);
+
+    let inputMarkDiv = document.createElement('div');
+    inputMarkDiv.className = 'formInput';
+    inputMarkDiv.append(inputMark);
+
+    let buttonSend = document.createElement('button');
+    buttonSend.type = 'button';
+    buttonSend.innerHTML = 'Добавить запись';
+    buttonSend.id = 'btnSend';
+
+    let buttonClear = document.createElement('button');
+    buttonClear.type = 'button';
+    buttonClear.innerHTML = 'Очистить поля';
+    buttonClear.id = 'btnClear';
+
+    let buttonBack = document.createElement('button');
+    buttonBack.type = 'button';
+    buttonBack.innerHTML = 'Вернуться назад';
+    buttonBack.id = 'btnBack';
+
+    let divButton = document.createElement('div');
+    divButton.className = 'processingBtn';
+
+    let heading = document.createElement('p');
+    heading.className = 'heading';
+    heading.innerHTML = head;
+
+    divButton.append(buttonSend);
+    divButton.append(buttonBack);
+    divButton.append(buttonClear);
+
+    divFlex.append(heading);
+    // divFlex.append(divTextInputId);
+    // divFlex.append(inputIdDiv);
+    //divFlex.append(divTextNameStudent);
+    //divFlex.append(selectNameStudentDiv);
+    //divFlex.append(divTextSubject);
+    // divFlex.append(selectSubjectDiv);
+    // divFlex.append(divTextTeacher);
+    // divFlex.append(selectTeacherDiv);
+    // divFlex.append(divTextSemester);
+    // divFlex.append(selectSemesterDiv);
+    divFlex.append(divTextMark);
+    divFlex.append(inputMarkDiv);
+    divFlex.append(divButton);
+    form.append(divFlex);
+    formDiv.append(form);
+}
+
 function sendObject(data = []) {
     if(checkFormSubject){
         sendRequst('POST', 'http://localhost:8080/subject/add', {
@@ -1573,6 +1756,8 @@ document.body.addEventListener('click', () => {
                     }, 500);
 
                 });
+
+                break;
             }
         }
     }
@@ -1596,6 +1781,56 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err));
                 }, 500);
 
+                break;
+            }
+            else if(target.id === `update${i + 1}`){
+                deleteTable();
+
+                formForAddGroupFaculty('Изменение записи');
+
+                let sendBtn = document.getElementById('btnSend');
+                sendBtn.innerHTML = 'Изменить запись'
+
+                let dataFromInput = document.getElementsByClassName('formInput');
+
+                let group;
+                let specialization;
+
+                sendBtn.addEventListener('click', function () {
+
+                    if (dataFromInput[0].firstElementChild.value.match(regExp) !== null) {
+                        group = dataFromInput[0].firstElementChild.value;
+                    } else {
+                        group = GroupFaculty[i].title;
+                    }
+                    if(dataFromInput[1].firstElementChild.value === 'Выберите специальность'){
+                        specialization = GroupFaculty[i].specializationId;
+                    } else{
+                        specialization = dataFromInput[1].firstElementChild.value;
+                    }
+
+                    let updateGroup = {
+                        id: GroupFaculty[i].id,
+                        title: group,
+                        specializationId: Number(specialization)
+                    }
+
+                    sendRequst('PATCH', 'http://localhost:8080/groupFaculty/update', updateGroup).
+                    then(data => console.log(data)).catch(err => console.log(err));
+
+                    setTimeout(() =>{
+                        deleteForm();
+
+                        sendRequst('GET', 'http://localhost:8080/groupFaculty').then(data => {
+                            parsingTh(data[0].field);
+                        }).catch(err => console.log(err))
+
+                        sendRequst("GET", "http://localhost:8080/groupFaculty").then(data =>{
+                            parsingTdForGroup(data, Specialization);
+                        }).catch(err => console.log(err))
+                    }, 500);
+
+                });
                 break;
             }
         }
@@ -1622,6 +1857,53 @@ document.body.addEventListener('click', () => {
 
                 break;
             }
+            else if(target.id === `update${i + 1}`){
+                deleteTable();
+
+                formChangForControlWeek('Изменение записи');
+
+                let sendBtn = document.getElementById('btnSend');
+                sendBtn.innerHTML = 'Изменить запись'
+
+                let dataFromInput = document.getElementsByClassName('formInput');
+
+
+                let mark;
+
+                sendBtn.addEventListener('click', function () {
+
+                    if(dataFromInput[0].firstElementChild.value.match(/[0-2]/g) !== null){
+                        mark = dataFromInput[0].firstElementChild.value;
+                    } else {
+                        mark = OneControlWeek[i].mark;
+                    }
+
+                    let updateOneControlWeek = {
+                        studentId: OneControlWeek[i].studentId,
+                        subjectId: OneControlWeek[i].subjectId,
+                        teacherId: OneControlWeek[i].teacherId,
+                        semesterId: OneControlWeek[i].semesterId,
+                        mark: mark
+                    }
+
+                    sendRequst('PATCH', 'http://localhost:8080/oneControlWeek/update', updateOneControlWeek).
+                    then(data => console.log(data)).catch(err => console.log(err));
+
+                    setTimeout(() =>{
+                        deleteForm();
+
+                        sendRequst('GET', 'http://localhost:8080/oneControlWeek').then(data => {
+                            parsingTh(data[0].field);
+                        }).catch(err => console.log(err))
+
+                        sendRequst("GET", "http://localhost:8080/oneControlWeek").then(data =>{
+                            parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                        }).catch(err => console.log(err))
+                    }, 500);
+
+                });
+                break;
+            }
         }
     }
     else if(checkTwoControlWeek) {
@@ -1646,6 +1928,53 @@ document.body.addEventListener('click', () => {
 
                 break;
             }
+            else if(target.id === `update${i + 1}`){
+                deleteTable();
+
+                formChangForControlWeek('Изменение записи');
+
+                let sendBtn = document.getElementById('btnSend');
+                sendBtn.innerHTML = 'Изменить запись'
+
+                let dataFromInput = document.getElementsByClassName('formInput');
+
+
+                let mark;
+
+                sendBtn.addEventListener('click', function () {
+
+                    if(dataFromInput[0].firstElementChild.value.match(/[0-2]/g) !== null){
+                        mark = dataFromInput[0].firstElementChild.value;
+                    } else {
+                        mark = TwoControlWeek[i].mark;
+                    }
+
+                    let updateTwoControlWeek = {
+                        studentId: TwoControlWeek[i].studentId,
+                        subjectId: TwoControlWeek[i].subjectId,
+                        teacherId: TwoControlWeek[i].teacherId,
+                        semesterId: TwoControlWeek[i].semesterId,
+                        mark: mark
+                    }
+
+                    sendRequst('PATCH', 'http://localhost:8080/twoControlWeek/update', updateTwoControlWeek).
+                    then(data => console.log(data)).catch(err => console.log(err));
+
+                    setTimeout(() =>{
+                        deleteForm();
+
+                        sendRequst('GET', 'http://localhost:8080/twoControlWeek').then(data => {
+                            parsingTh(data[0].field);
+                        }).catch(err => console.log(err))
+
+                        sendRequst("GET", "http://localhost:8080/twoControlWeek").then(data =>{
+                            parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                        }).catch(err => console.log(err))
+                    }, 500);
+
+                });
+                break;
+            }
         }
     }
     else if(checkThreeControlWeek) {
@@ -1668,6 +1997,53 @@ document.body.addEventListener('click', () => {
                     }).catch(err => console.log(err));
                 }, 500);
 
+                break;
+            }
+            else if(target.id === `update${i + 1}`){
+                deleteTable();
+
+                formChangForControlWeek('Изменение записи');
+
+                let sendBtn = document.getElementById('btnSend');
+                sendBtn.innerHTML = 'Изменить запись'
+
+                let dataFromInput = document.getElementsByClassName('formInput');
+
+
+                let mark;
+
+                sendBtn.addEventListener('click', function () {
+
+                    if(dataFromInput[0].firstElementChild.value.match(/[0-2]/g) !== null){
+                        mark = dataFromInput[0].firstElementChild.value;
+                    } else {
+                        mark = ThreeControlWeek[i].mark;
+                    }
+
+                    let updateOneControlWeek = {
+                        studentId: ThreeControlWeek[i].studentId,
+                        subjectId: ThreeControlWeek[i].subjectId,
+                        teacherId: ThreeControlWeek[i].teacherId,
+                        semesterId: ThreeControlWeek[i].semesterId,
+                        mark: mark
+                    }
+
+                    sendRequst('PATCH', 'http://localhost:8080/threeControlWeek/update', updateOneControlWeek).
+                    then(data => console.log(data)).catch(err => console.log(err));
+
+                    setTimeout(() =>{
+                        deleteForm();
+
+                        sendRequst('GET', 'http://localhost:8080/threeControlWeek').then(data => {
+                            parsingTh(data[0].field);
+                        }).catch(err => console.log(err))
+
+                        sendRequst("GET", "http://localhost:8080/threeControlWeek").then(data =>{
+                            parsingTdForControlWeek(data, Student, Subject, Teacher, GroupFaculty);
+                        }).catch(err => console.log(err))
+                    }, 500);
+
+                });
                 break;
             }
         }
